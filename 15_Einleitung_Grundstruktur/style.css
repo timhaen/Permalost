@@ -1,0 +1,80 @@
+body {
+  background-color: rgb(234, 234, 234);
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  background-image: url('bilder/erde.png');
+  background-size: cover; 
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background-image 0.5s ease; /* Kurze Transition für das Hintergrundbild */
+  hyphens: auto;
+}
+
+p {
+  font-family: "space grotesk";
+  font-size: 16px;
+  padding-left: 20px;
+  hyphens: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+h2 {
+  font-family: "space grotesk";
+  font-size: 16px;
+  padding-left: 20px;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+button {
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.button-next {
+  right: 20px;
+  bottom: 20px;
+}
+
+.button-back {
+  left: 20px;
+  bottom: 20px;
+}
+
+button img {
+  height: 20px;
+  transition: filter 0.3s; /* Smooth transition for the shadow effect */
+}
+
+.button-text {
+  font-family: "space grotesk";
+  font-size: 16px;
+  font-weight: bold;
+  color: #25396a; /* Beispiel für Textfarbe */
+  margin-right: 10px;
+}
+
+.textbox {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.8); /* Hintergrundfarbe der Textbox mit Transparenz */
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}

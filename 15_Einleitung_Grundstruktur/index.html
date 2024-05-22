@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Einleitung Grundstruktur</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+  </head>
+  <body>
+    <svg width="100%" height="100%"></svg>
+
+    <button class="button-next" role="button">
+      <span class="button-text">Entdecken</span>
+      <img src="grafische_elemente/pfeil_weiter.svg" alt="Next" />
+    </button>
+
+    <button class="button-back" role="button">
+      <img src="grafische_elemente/pfeil_zurueck.svg" alt="Back" />
+    </button>
+
+    <script>
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const svg = d3.select("svg").attr("width", width).attr("height", height);
+
+      const backgrounds = [
+        "bilder/erde.png",
+        "bilder/erde2.png",
+        "bilder/sibirien.png",
+        "bilder/alaska.png",
+        "bilder/batagaika.png",
+        "bilder/bondo.png",
+        "bilder/petroleum.png",
+      ];
+
+      const textboxContents = [
+        {
+          title: "PERMALOST",
+          content: "Das irreversible Auftauen des Permafrosts",
+          style: {
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "75vw",
+            height: "auto",
+            backgroundColor: "rgba(234, 234, 234, 0.8)",
+            boxShadow: "none",
+            color: "#25396A",
+            textAlign: "center",
+          },
+        },
+        {
+          title: "Permafrost",
+          content: "Als Permafrost wird Boden bezeichnet, dessen Temperatur in der Tiefe für mindestens zwei Jahre unter null Grad Celsius liegt und der aus Eis, Gestein und organischem Material besteht. Die Permafrostschicht kann wenige Meter bis mehrere hundert Meter dick sein,wobei der oberste Teil im Sommer auftaut und im Winter wieder gefriert. Dieser Teil wird als aktive Schicht bezeichnet.",
+          style: {
+            top: "50%",
+            left: "50px",
+            width: "300px",
+            height: "auto",
+            transform: "translateY(-50%)",
+            backgroundColor: "transparent",
+            boxShadow: "none",
+            color: "#25396A"
+          },
+        },
+        {
+          title: "Sibieren + Skandinavien",
+          content: "Die Landmassen von Russland befinden sich etwa zu 65% in der Permafrostzone. In Skandinavien ist 2.2% der Böden Dauerfrostboden und in China etwa 20%.",
+          style: {
+            top: "50%",
+            left: "50px",
+            width: "300px",
+            height: "auto",
+            transform: "translateY(-50%)",
+            backgroundColor: "transparent",
+            boxShadow: "none",
+            color: "#25396A"
+          },
+        },
+        {
+          title: "Alaska, Kanada + Grönland",
+          content: "Die Landmassen von Alaska befinden sich etwa zu 80% in der Permafrostzone. In Kanada ist 65% der Böden Dauerfrostboden und in Grönland 99%.",
+          style: {
+            top: "50%",
+            left: "50px",
+            width: "300px",
+            height: "auto",
+            transform: "translateY(-50%)",
+            backgroundColor: "transparent",
+            boxShadow: "none",
+            color: "#25396A"
+          },
+        },
+        {
+          title: "Bodenabsenkung",
+          content: "Durch den Temperaturanstieg in Permafrostgebieten schmilzt das Eis im Boden und es entstehen Hohlräume, die bei einem Einsturz den Boden absacken lassen. Das geschmolzene Eis tritt als Wasser an die Oberfläche und bildet kleine Seen und Teiche, wodurch die einzigartige Permafrostlandschaft entsteht aber auch Gebäude und Infrastruktur gefährdet werden.",
+          style: {
+            top: "50px",
+            left: "50px",
+            width: "300px",
+            height: "auto",
+            backgroundColor: "transparent",
+            boxShadow: "none",
+            color: "#fff"
+          },
+        },
+        {
+          title: "Murgänge und Felsstürze",
+          content: "Zusätzlich erhöht sich in den hochalpinen Gebieten das Risiko von Felsstürzen aufgrund der instabileren Beschaffenheiten der Berge.",
+          style: {
+            top: "50%",
+            left: "50px",
+            width: "300px",
+            height: "auto",
+            transform: "translateY(-50%)",
+            backgroundColor: "transparent",
+            boxShadow: "none",
+            color: "#fff"
+          },
+        },
+        {
+          title: "Freisetzung von Treibhausgasen",
+          content: "Schätzungen zufolge sind in den Permafrostgebieten weltweit 1700 Gigatonnen Kohlenstoff in Form von organischem Material gespeichert (vgl. Miner et al. 2022). Dieser Wert entspricht mehr als der doppelten Menge Kohlenstoff die aktuell in der Atmosphäre gespeichert ist (vgl. Klatt 2019). Mit dem Auftauen beginnen Mikroorganismen dieses organische Material abzubauen, wodurch Kohlendioxid (CO2) und Methan (CH4) in die Atmosphäre freigesetzt werden. Die freigesetzten Treibhausgase treiben den Klimawandel weiter voran(positiver Rückkopplungseffekt).",
+          style: {
+            bottom: "50px",
+            left: "50px",
+            width: "300px",
+            height: "auto",
+            backgroundColor: "transparent",
+            boxShadow: "none",
+            color: "#fff"
+          },
+        },
+      ];
+
+      let currentBackgroundIndex = 0;
+      let currentTextbox;
+
+      // Funktion zum Aktualisieren des Hintergrundbilds und der Textbox
+// Funktion zum Aktualisieren des Hintergrundbilds und der Textbox
+function updateBackgroundAndTextbox() {
+  document.body.style.backgroundImage = `url('${backgrounds[currentBackgroundIndex]}')`;
+
+  // Entferne die vorherige Textbox, falls vorhanden
+  if (currentTextbox) currentTextbox.remove();
+
+  // Erstelle und positioniere die neue Textbox
+  const textboxConfig = textboxContents[currentBackgroundIndex];
+  const textbox = document.createElement("div");
+  textbox.classList.add("textbox");
+  Object.assign(textbox.style, textboxConfig.style);
+  textbox.innerHTML = `<h2>${textboxConfig.title}</h2><p>${textboxConfig.content}</p>`;
+  document.body.appendChild(textbox);
+  currentTextbox = textbox;
+
+  // Pfeile und Button-Text basierend auf dem aktuellen Bildindex anzeigen oder ausblenden
+  if (currentBackgroundIndex === 0) {
+    backButton.style.display = "none"; // Blende den Zurück-Pfeil auf der ersten Seite aus
+    nextButton.querySelector(".button-text").textContent = "Entdecken"; // Setze den Button-Text auf "Entdecken"
+    // Für die erste Textbox
+    const title = textbox.querySelector("h2");
+    const content = textbox.querySelector("p");
+    title.style.fontSize = "110px";
+    content.style.fontSize = "30px";
+    
+  } else {
+    backButton.style.display = "block"; // Zeige den Zurück-Pfeil auf anderen Seiten an
+    nextButton.querySelector(".button-text").textContent = ""; // Entferne den Text auf anderen Seiten
+    // Für die folgenden Textboxen
+    const title = textbox.querySelector("h2");
+    const content = textbox.querySelector("p");
+    title.style.fontSize = "16px";
+    content.style.fontSize = "16px";
+  }
+
+  if (currentBackgroundIndex > 3 && currentBackgroundIndex < 7) {
+    nextButton.querySelector("img").src = "grafische_elemente/pfeil_weiter_weiss.svg";
+    backButton.querySelector("img").src = "grafische_elemente/pfeil_zurueck_weiss.svg";
+  } else {
+    nextButton.querySelector("img").src = "grafische_elemente/pfeil_weiter.svg";
+    backButton.querySelector("img").src = "grafische_elemente/pfeil_zurueck.svg";
+  }
+}
+
+
+      // Button-Elemente auswählen
+      const nextButton = document.querySelector(".button-next");
+      const backButton = document.querySelector(".button-back");
+
+      // Hintergrundbild und Textbox beim Klick auf den nächsten Button aktualisieren
+      nextButton.addEventListener("click", function () {
+        currentBackgroundIndex = (currentBackgroundIndex + 1) % backgrounds.length;
+        updateBackgroundAndTextbox();
+      });
+
+      // Hintergrundbild und Textbox beim Klick auf den vorherigen Button aktualisieren
+      backButton.addEventListener("click", function () {
+        currentBackgroundIndex =
+          (currentBackgroundIndex - 1 + backgrounds.length) %
+          backgrounds.length;
+        updateBackgroundAndTextbox();
+      });
+
+      // Initialisierung des Hintergrundbilds und der Textbox
+      updateBackgroundAndTextbox();
+    </script>
+  </body>
+</html>
