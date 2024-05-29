@@ -1,0 +1,52 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(20, 20, 20);
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.range-slider {
+  width: 50%; /* Breite des Sliders anpassen */
+  position: absolute;
+  bottom: 4%; /* Abstand von unten einstellen */
+  z-index: 2;
+}
+
+/* Länge und Farbe des Sliders */
+#rs-range-line {
+  width: 50vw;
+  height: 15px;
+  background-color: rgb(255, 0, 221);
+  -webkit-appearance: none;
+}
+
+input::-webkit-slider-thumb {
+  width: 5px;
+  height: 30px;
+  background-color: white;
+  border-radius: 3px;
+  top: -10px;
+  -webkit-appearance: none;
+}
