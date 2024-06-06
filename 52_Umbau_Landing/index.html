@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Permafrost Hauptvisualisierung</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(40, 40, 40);
+        overflow: hidden;
+      }
+
+      h4 {
+        margin: 0;
+        margin-left: 1vw;
+      }
+
+      h5 {
+        margin: 0;
+        font-size: large;
+      }
+
+      h6 {
+        margin-bottom: 0;
+        margin-top: 0.5vh;
+        font-size: 1.5vh;
+        font-weight: 400;
+      }
+
+      .slider-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        bottom: 3%;
+        position: absolute;
+      }
+
+      .nav-bar {
+        display: inline-flex;
+        flex-direction: row;
+        justify-content: space-between;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 1);
+        top: 0;
+        height: 6vh;
+        width: 100%;
+        z-index: 3;
+      }
+
+      #titel-nav-bar {
+        font-family: "space grotesk";
+        font-size: 4vh;
+        color: white;
+        margin-left: 2vw;
+        padding: 0;
+      }
+
+      #btn-container-mitte {
+        display: inline-flex;
+        margin: 0;
+        height: 100%;
+      }
+
+      #btn-container-rechts {
+        margin-right: 2vw;
+        height: 100%;
+        width: auto;
+      }
+
+      .btn-div-container {
+        display: inline-flex;
+        margin-top: 0.5vh;
+        margin-left: 1vw;
+        width: auto;
+        height: 100%;
+        flex-direction: column;
+        gap: 0.6vh;
+      }
+
+      .btn-container {
+      }
+
+      #btn-intro,
+      #btn-home,
+      #btn-alt,
+      #btn-grndtmp,
+      #btn-aktuell,
+      #btn-prognose,
+      #btn-credits {
+        font-family: "space grotesk";
+        font-size: 1.5vh;
+        color: white;
+        height: 2vh;
+        background-color: transparent;
+        border: none;
+        z-index: 2;
+      }
+
+      #btn-intro:hover,
+      #btn-home:hover,
+      #btn-alt:hover,
+      #btn-grndtmp:hover,
+      #btn-aktuell:hover,
+      #btn-prognose:hover,
+      #btn-credits:hover {
+        color: rgb(169, 169, 169);
+      }
+
+      #btn-intro:active,
+      #btn-home:active,
+      #btn-alt:active,
+      #btn-grndtmp:active,
+      #btn-aktuell:active,
+      #btn-prognose:active,
+      #btn-credits:active {
+        color: #cae3fc;
+      }
+
+      svg {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+      }
+
+      .beschreibung-container-alt,
+      .beschreibung-container-grndtmp {
+        position: absolute;
+        width: 20vw;
+        left: 3vw;
+        top: 10vh;
+        color: white;
+        font-family: "space grotesk";
+        z-index: 2;
+      }
+
+      .beschreibung-container-grndtmp {
+        display: block;
+      }
+
+      .beschreibung-container-alt {
+        display: none;
+      }
+
+      .range-slider {
+        width: 50%;
+        position: flex;
+        z-index: 2;
+      }
+
+      #rs-range-line {
+        width: 50vw;
+        height: 15px;
+        background-color: rgb(169, 169, 169);
+        -webkit-appearance: none;
+      }
+
+      input::-webkit-slider-thumb {
+        width: 5px;
+        height: 30px;
+        background-color: white;
+        border-radius: 3px;
+        top: -10px;
+        -webkit-appearance: none;
+      }
+
+      #rs-bullet {
+        font-family: "space grotesk";
+        font-size: 2vh;
+        color: white;
+        position: flex;
+        margin-right: 20px;
+        z-index: 3;
+      }
+
+      .bar-chart {
+        position: absolute;
+        top: 10vh;
+        right: 3vw;
+        width: 18vw;
+        height: 18.5vh;
+        z-index: 2;
+      }
+
+      .bar-label {
+        font-family: "space grotesk";
+        font-size: 1.3vh;
+      }
+
+      .grid-label {
+        font-family: "space grotesk";
+        font-size: 1.3vh;
+      }
+
+      .chart-label {
+        font-family: "space grotesk";
+        font-size: 1.3vh;
+      }
+
+      .overlay {
+        position: fixed;
+         width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 1);
+        display: none;
+        z-index: 4;
+        color: white;
+        font-family: "space grotesk";
+        overflow: auto;
+        padding: 2vh 2vw;
+      }
+
+      #titel-permafrost {
+        position: absolute;
+        top: 1.5625vh;
+        left: 1.5625vw;
+        width: 33vw;
+        color: white;
+        padding: 0;
+        margin: 0;
+        font-family: "space grotesk";
+      }
+
+      .overlay h1 {
+        font-size: 11.3vh;
+        padding: 0;
+        margin: 0;
+      }
+
+      .overlay h2 {
+        font-size: 5vh;
+        text-align: right;
+        padding: 0;
+        margin: 0;
+      }
+
+      .overlay h3 {
+        font-size: 2vh;
+        padding: 0;
+        margin: 0;
+      }
+
+      .overlay p {
+        font-size: 1.5vh;
+        text-align: left;
+        hyphens: auto;
+        -webkit-hyphens: auto;
+        -ms-hyphens: auto;
+        -moz-hyphens: auto;
+        padding: 0;
+        margin: 0;
+      }
+
+      .overlay #navigation {
+        position: absolute;
+        top: 1.5625vh;
+        right: 5vw;
+        display: inline-flex;
+        gap: 1vh;
+      }
+
+      .overlay .btn-nav,
+      .overlay .btn-aktuell,
+      .overlay .btn-zukunft {
+        background: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+        color: inherit;
+        outline: none;
+        cursor: pointer;
+        z-index: 2;
+        color: white;
+      }
+
+      .overlay .btn-nav {
+        font-size: 1.5vh;
+        padding: 5px 10px 5px 10px;
+      }
+
+      .overlay .btn-aktuell,
+      .overlay .btn-zukunft {
+        font-size: 2vh;
+        width: 14.7915vw;
+        outline: 1px solid white;
+      }
+
+      .overlay .btn-nav:hover,
+      .overlay .btn-aktuell:hover,
+      .overlay .btn-zukunft:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+      }
+
+      .overlay .containerThemen {
+        font-family: "space grotesk";
+        color: white;
+        position: absolute;
+        height: auto;
+        left: 9.7395vw;
+        right: 9.7395vw;
+        top: 30vh;
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        gap: 3vh;
+      }
+
+      .overlay .container {
+        width: 100%;
+      }
+
+      .overlay #containerRCP {
+        width: 14.7915vw;
+        padding: 0;
+        margin-left: auto;
+        font-size: 100;
+        font-family: "space grotesk";
+      }
+
+      .overlay #containerGrndtmp,
+      .overlay #containerAlt {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        gap: 1vh;
+      }
+
+      .overlay .button-container-zukunft,
+      .overlay .button-container-aktuell {
+        display: flex;
+        justify-content: space-between;
+        width: 14.7915vw;
+      }
+
+      .overlay #titel-rcp,
+      .overlay #text-rcp {
+        width: 100%;
+      }
+
+      .overlay #titel-alt,
+      .overlay #titel-grndtmp {
+        width: 22.9685vw;
+      }
+
+      .overlay #text-alt,
+      .overlay #text-grndtmp {
+        width: 22.9685vw;
+      }
+
+      .overlay #umriss-container{
+        position: absolute;
+        top: 51.7vh;
+        right: 9.2vw;
+        width: 33.7vw;
+        height: 33vh;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 1.9vw;
+      }
+
+      .overlay .umriss{
+        display: flex;
+        align-items: flex-end; /* Align items at the bottom */
+        justify-content: center; /* Center horizontally */
+        width: 100%;
+        height: 100%;
+        outline: 1px dashed white;
+        color: white;
+        text-align: center;
+        font-family: "space grotesk";
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="map" style="width: 100%"></div>
+    <div id="grid" style="width: 100%"></div>
+    <div class="bar-chart"></div>
+
+    <div class="nav-bar">
+      <div id="titel-nav-bar">
+        <h4>PERMALOST</h4>
+      </div>
+      <div id="btn-container-mitte">
+        <div class="btn-div-container">
+          <button id="btn-intro">Einleitung</button>
+        </div>
+        <div class="btn-div-container">
+          <button id="btn-home">Home</button>
+        </div>
+
+        <div class="btn-div-container">
+          <div class="btn-container">
+            <button id="btn-grndtmp">Bodentemperatur</button>
+          </div>
+          <div class="btn-container">
+            <button id="btn-alt">Auftauschicht</button>
+          </div>
+        </div>
+
+        <div class="btn-div-container">
+          <div class="btn-container">
+            <button id="btn-aktuell">Aktuelle Daten</button>
+          </div>
+          <div class="btn-container">
+            <button id="btn-prognose">Prognosedaten</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="btn-container-rechts">
+        <div class="btn-div-container">
+          <button id="btn-credits">CREDITS</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="beschreibung-container-grndtmp">
+      <h5>Bodentemperatur</h5>
+      <h6>
+        Die Bodentemperatur ist ein Indikator dafür, ob der Permafrost taut oder
+        gefroren bleibt. Die Daten stammen aus Messungen in 2 m Tiefe und
+        reagieren langsamer auf kurzfristige Klima-veränderungen. Ein
+        kontinuierlicher Temperaturanstieg über längere Zeit weist daher auf
+        eine anhaltende Erwärmung hin und erhöht das Risiko eines Auftauens des
+        Permafrosts.
+      </h6>
+    </div>
+
+    <div class="beschreibung-container-alt">
+      <h5>Auftauschicht</h5>
+      <h6>
+        Die Mächtigkeit der Auftauschicht ist ein Indikator dafür, wie tief der
+        Permafrost auftaut. Je tiefer die Auftauschicht ist, desto grösser ist
+        die Gefahr, dass sich Hohlräume bilden und der Boden absackt. Zudem
+        deutet eine kontinuierliche Zunahme der Auftauschichtdicke auf eine
+        anhaltende Erwärmung hin.
+      </h6>
+    </div>
+
+    <div class="slider-container">
+      <!-- Text für das aktuelle Jahr -->
+      <span id="rs-bullet">1997</span>
+
+      <!-- Slider -->
+      <div class="range-slider">
+        <!-- Slidereinstellungen -->
+        <input
+          id="rs-range-line"
+          class="rs-range"
+          type="range"
+          value="1997"
+          min="1997"
+          max="2021"
+          step="1"
+        />
+      </div>
+    </div>
+
+    <div id="overlay-home" class="overlay">
+      <div id="titel-permafrost">
+        <h1>PERMALOST</h1>
+      </div>
+
+      <div id="navigation">
+        <button class="btn-nav">EINLEITUNG</button>
+        <button class="btn-nav">CREDITS</button>
+      </div>
+
+      <div class="containerThemen">
+        <div id="containerRCP" class="container">
+          <div id="titel-rcp"><h3>RCP</h3></div>
+          <div id="text-rcp">
+            <p>
+              Repräsentative Konzentrationspfade (RCPs) beschreiben die
+              Entwicklung der Treibhausgaskonzentrationen. RCP 2.6 steht für
+              starke Klimaschutz&shy;anstrengungen, RCP 4.5 für moderate An&shy;strengungen
+              und RCP 8.5 für ein "Weiter-wie-bisher" Szenario. Aktuelle Mess&shy;ungen
+              zeigen einen Pfad zwischen RCP 4.5 und RCP 8.5.
+            </p>
+          </div>
+        </div>
+
+        <div id="containerGrndtmp" class="container">
+          <div id="titel-grndtmp"><h2>Bodentemperatur</h2></div>
+          <div id="text-grndtmp">
+            <p>
+              Die Bodentemperatur ist ein Indikator dafür, ob der Perma&shy;frost taut
+              oder gefroren bleibt. Die Daten stammen aus Messungen in 2 m Tiefe
+              und reagieren daher langsamer auf kurzfristige Klimaveränderungen.
+              Ein kontinuierlicher Temperaturanstieg über längere Zeit weist daher
+              auf eine anhaltende Erwärmung hin und erhöht das Risiko eines
+              Auftauens des Permafrosts.
+            </p>
+          </div>
+
+          <div class="button-container-aktuell">
+            <button class="btn-aktuell" id="grndtmp-btn-aktuell">Aktuelle Zahlen</button>
+          </div>
+          <div class="button-container-zukunft">
+            <button class="btn-zukunft" id="grndtmp-btn-zukunft">RCP</button>
+          </div>
+        </div>
+
+        <div id="containerAlt" class="container">
+          <div id="titel-alt"><h2>Auftauschicht</h2></div>
+          <div id="text-alt">
+            <p>
+              Die Mächtigkeit der Auftauschicht ist ein Indikator dafür, wie tief
+              der Permafrost auftaut. Je tiefer die Auftauschicht ist, desto
+              grösser ist die Gefahr, dass sich Hohlräume bilden und der Boden
+              absackt. Zudem deutet eine kontinuierliche Zunahme der
+              Auftauschichtdicke auf eine anhaltende Erwärmung hin.
+            </p>
+          </div>
+          <div class="button-container-aktuell">
+            <button class="btn-aktuell" id="alt-btn-aktuell">Aktuelle Zahlen</button>
+          </div>
+          <div class="button-container-zukunft">
+            <button class="btn-zukunft" id="alt-btn-zukunft">RCP</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="umriss-container">
+        <div class="umriss"><h3>1997 - 2021</h3></div>
+
+        <div class="umriss"><h3>2010 - 2100</h3></div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
