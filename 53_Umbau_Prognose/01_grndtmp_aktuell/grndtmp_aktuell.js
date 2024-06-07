@@ -2,33 +2,31 @@
   let projection, svg, barChartSvg;
   let permafrostData = [];
 
-  const buttons = document.querySelectorAll('.button-container button');
+  const buttons = document.querySelectorAll(".button-container button");
 
-  buttons.forEach(button => {
-    button.addEventListener('click', () => {
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
       activateButton(button.id);
     });
   });
 
   function activateButton(activeButtonId) {
-    buttons.forEach(button => {
+    buttons.forEach((button) => {
       if (button.id === activeButtonId) {
-        button.classList.add('active');
+        button.classList.add("active");
       } else {
-        button.classList.remove('active');
+        button.classList.remove("active");
       }
     });
   }
 
   const rangeSlider = document.getElementById("rs-range-line");
-  const rangeBullet = document.getElementById("rs-bullet");
 
-  if (rangeSlider && rangeBullet) {
+  if (rangeSlider) {
     rangeSlider.addEventListener(
       "input",
       () => {
         const year = rangeSlider.value;
-        rangeBullet.innerHTML = year;
         loadGrndtmpAktuell(year);
       },
       false
@@ -40,13 +38,18 @@
     const height = window.innerHeight;
     const sensitivity = 75;
 
-    svg = d3.select("#map").append("svg").attr("width", width).attr("height", height);
+    svg = d3
+      .select("#map")
+      .append("svg")
+      .attr("width", width)
+      .attr("height", height);
 
-    projection = d3.geoOrthographic()
-      .scale(height / 10 * 7)
+    projection = d3
+      .geoOrthographic()
+      .scale((height / 10) * 7)
       .center([0, 0])
       .rotate([0, -55])
-      .translate([width / 2, height / 10 * 7.5]);
+      .translate([width / 2, (height / 10) * 7.5]);
 
     const initialScale = projection.scale();
     let path = d3.geoPath().projection(projection);
@@ -75,68 +78,95 @@
     svg
       .append("circle")
       .attr("cx", width / 2)
-      .attr("cy", height / 10 * 7.5)
+      .attr("cy", (height / 10) * 7.5)
       .attr("r", initialScale * 1.05)
       .attr("fill", "url(#atmosphere-gradient)");
 
-    const globe = svg.append("circle")
+    const globe = svg
+      .append("circle")
       .attr("fill", "rgb(40, 40, 40)")
       .attr("stroke", "#000")
       .attr("stroke-width", "0.2")
       .attr("cx", width / 2)
-      .attr("cy", height / 10 * 7.5)
+      .attr("cy", (height / 10) * 7.5)
       .attr("r", initialScale);
 
     let currentRotation = projection.rotate();
 
-    svg.call(d3.drag().on('drag', (event) => {
-      const k = sensitivity / projection.scale();
-      currentRotation[0] -= -event.dx * k;
-      projection.rotate(currentRotation);
-      path = d3.geoPath().projection(projection);
-      svg.selectAll("path").attr("d", path);
-      drawGrndtmpAktuell(permafrostData);
-    }));
+    svg.call(
+      d3.drag().on("drag", (event) => {
+        const k = sensitivity / projection.scale();
+        currentRotation[0] -= -event.dx * k;
+        projection.rotate(currentRotation);
+        path = d3.geoPath().projection(projection);
+        svg.selectAll("path").attr("d", path);
+        drawGrndtmpAktuell(permafrostData);
+      })
+    );
 
     const map = svg.append("g");
 
-    barChartSvg = d3.select(".bar-chart").append("svg").attr("width", 200).attr("height", height);
+    barChartSvg = d3
+      .select("#barChartSvg")
+      .attr("width", "100%")
+      .attr("height", "100%");
 
     d3.json("../world.json").then(function (data) {
-      map.append("g")
+      map
+        .append("g")
         .attr("class", "countries")
         .selectAll("path")
         .data(data.features)
-        .enter().append("path")
-        .attr("class", d => "country_" + d.properties.name.replace(" ", "_"))
+        .enter()
+        .append("path")
+        .attr("class", (d) => "country_" + d.properties.name.replace(" ", "_"))
         .attr("d", path)
         .attr("fill", "rgb(60,60,60)")
-        .style('stroke', 'black')
-        .style('stroke-width', 0.3)
+        .style("stroke", "black")
+        .style("stroke-width", 0.3)
         .style("opacity", 0.8);
 
       // Load permafrost data after the map is drawn
       loadGrndtmpAktuell(rangeSlider.value);
     });
 
-    const colors = ["#FFE600", "#FEC400", "#F79E05", "#FC7E00", "#EA5E3C", "#D83F7D", "#C520BE", "#B200FC"];
-    const labels = ["-22 C° bis -18.25 C°", "-18.25 C° bis -14.5 C°", "-14.5 C° bis -10.75 C°", "-10.75 C° bis -7 C°", "-7 C° bis -3.25 C°", "-3.25 C° bis 0.5 C°", "0.5 C° bis 4.25 C°", "-4.25 C° bis 8 C°"];
+    const colors = [
+      "#FFE600",
+      "#FEC400",
+      "#F79E05",
+      "#FC7E00",
+      "#EA5E3C",
+      "#D83F7D",
+      "#C520BE",
+      "#B200FC",
+    ];
+    const labels = [
+      "-22 C° bis -18.25 C°",
+      "-18.25 C° bis -14.5 C°",
+      "-14.5 C° bis -10.75 C°",
+      "-10.75 C° bis -7 C°",
+      "-7 C° bis -3.25 C°",
+      "-3.25 C° bis 0.5 C°",
+      "0.5 C° bis 4.25 C°",
+      "-4.25 C° bis 8 C°",
+    ];
 
     // Add squares and labels
     const legend = d3.select(".legende svg");
 
     // Add title
-    legend.append("text")
+    legend
+      .append("text")
       .attr("class", "legende-titel")
       .attr("x", "1vh")
       .attr("y", "2vh") // Position above the rectangles
       .attr("text-anchor", "start") // Align text to the start (left side)
-      .style("font-size", "1vh") // Set font size to 1vh
       .attr("fill", "white")
       .style("font-size", "1.3vh")
       .text("Bodentemperatur");
 
-    legend.selectAll("rect")
+    legend
+      .selectAll("rect")
       .data(colors)
       .enter()
       .append("rect")
@@ -145,9 +175,10 @@
       .attr("y", (d, i) => i * (30 / 10) + 3.6 + "vh")
       .attr("width", "1.5vh")
       .attr("height", "1.5vh")
-      .attr("fill", d => d);
+      .attr("fill", (d) => d);
 
-    legend.selectAll("text.label")
+    legend
+      .selectAll("text.label")
       .data(labels)
       .enter()
       .append("text")
@@ -156,14 +187,15 @@
       .attr("y", (d, i) => i * (30 / 10) + 4.8 + "vh")
       .attr("fill", "white")
       .style("font-size", "1.3vh")
-      .text(d => d);
+      .text((d) => d);
 
     // Add baseline and ticks to the range slider
     const rangeSliderLine = d3.select(".range-slider-line");
 
     // Add unterteiler
     const unterteilerCount = 25;
-    const unterteiler = rangeSliderLine.append("div")
+    const unterteiler = rangeSliderLine
+      .append("div")
       .attr("class", "unterteiler")
       .style("position", "absolute")
       .style("bottom", "0") // Align with the bottom
@@ -174,7 +206,8 @@
       .style("justify-content", "space-between");
 
     for (let i = 0; i < unterteilerCount; i++) {
-      unterteiler.append("div")
+      unterteiler
+        .append("div")
         .style("width", "3px")
         .style("height", "20px")
         .style("border-radius", "10px")
@@ -182,24 +215,40 @@
     }
 
     // Add baseline
-    rangeSliderLine.append("div")
+    rangeSliderLine
+      .append("div")
       .attr("class", "baseline")
       .style("position", "absolute")
-      .style("bottom", "0")  // Position baseline at the bottom
+      .style("bottom", "0") // Position baseline at the bottom
       .style("left", "0.2vw")
       .style("width", "calc(100% - 0.2vw)") // Adjust width to fit inside the container
       .style("height", "2px")
       .style("border-radius", "10px")
       .style("background-color", "white");
 
-    const zahlenListe = ["1997", "1999", "2001", "2003", "2005", "2007", "2009", "2011", "2013", "2015", "2017", "2019", "2021"];
+    const zahlenListe = [
+      "1997",
+      "1999",
+      "2001",
+      "2003",
+      "2005",
+      "2007",
+      "2009",
+      "2011",
+      "2013",
+      "2015",
+      "2017",
+      "2019",
+      "2021",
+    ];
 
     // Add baseline and ticks to the range slider
     const zahlenSlider = d3.select(".range-slider-zahlen");
 
     // Add zahlen
     zahlenListe.forEach((jahr, index) => {
-      zahlenSlider.append("div")
+      zahlenSlider
+        .append("div")
         .attr("class", "zahl")
         .style("position", "absolute")
         .style("left", `${(index / (zahlenListe.length - 1)) * 100}%`)
@@ -212,7 +261,9 @@
 
   function loadGrndtmpAktuell(year) {
     d3.csv("../data/filtered_data_grndtmp_1997_2021.csv").then(function (data) {
-      const filteredData = data.filter(d => parseFloat(d.year) === parseFloat(year));
+      const filteredData = data.filter(
+        (d) => parseFloat(d.year) === parseFloat(year)
+      );
 
       filteredData.forEach(function (d, i) {
         d.year = parseInt(d.year);
@@ -312,8 +363,7 @@
 
     const height = barChartElement.clientHeight;
     const width = barChartElement.clientWidth;
-    const barWidth = width / 10;
-    const barHeight = height - 20; // Subtract some padding from height
+    const barWidth = width / 11;
     const unitHeight = 0.23; // Fixed height per data point
 
     // Remove old bars and text
@@ -334,9 +384,9 @@
     barChartSvg
       .append("line")
       .attr("class", "grid")
-      .attr("x1", 50)
+      .attr("x1", width / 10)
       .attr("y1", height - 30) // Align with the bottom of the bars
-      .attr("x2", width - 30)
+      .attr("x2", width / 10 * 9)
       .attr("y2", height - 30) // Align with the bottom of the bars
       .attr("stroke", "#A9A9A9")
       .attr("stroke-width", 1);
@@ -345,35 +395,35 @@
     barChartSvg
       .append("line")
       .attr("class", "grid")
-      .attr("x1", 50)
+      .attr("x1", (width / 10))
       .attr("y1", height - 30) // Align with the bottom of the bars
-      .attr("x2", 50)
-      .attr("y2", 30) // Align with the bottom of the bars
+      .attr("x2", (width / 10))
+      .attr("y2", 10) // Align with the bottom of the bars
       .attr("stroke", "#A9A9A9")
       .attr("stroke-width", 2);
 
     // Add grid lines and labels for 100, 200, and 300
-    [250, 500, 750].forEach((value) => {
+    [0, 250, 500, 750].forEach((value) => {
       barChartSvg
         .append("line")
         .attr("class", "grid")
-        .attr("x1", 50)
+        .attr("x1", width / 10)
         .attr("y1", height - 30 - value * unitHeight) // Align with the bottom of the bars
-        .attr("x2", width - 30)
+        .attr("x2", width / 10 * 9)
         .attr("y2", height - 30 - value * unitHeight) // Align with the bottom of the bars
         .attr("stroke", "#A9A9A9")
         .attr("stroke-width", 1)
         .attr("stroke-dasharray", "5,3");
 
-      //Add grid labels
+      // Add grid labels
       barChartSvg
         .append("text")
         .attr("class", "grid-label")
-        .attr("x", 42)
+        .attr("x", width / 10-4)
         .attr("y", height - 32 - value * unitHeight + 3.5)
         .attr("text-anchor", "end")
         .attr("fill", "rgb(220, 220, 220)")
-        .style("text-size", "1.3vh")
+        .style("font-size", "1.3vh")
         .text(value);
     });
 
@@ -384,7 +434,7 @@
       .enter()
       .append("rect")
       .attr("class", "bar")
-      .attr("x", (d, i) => 60 + i * barWidth)
+      .attr("x", (d, i) => (width / 5) * 3.9 - i * barWidth)
       .attr("y", (d) => height - d * unitHeight - 30)
       .attr("width", barWidth - 6)
       .attr("height", (d) => d * unitHeight)
@@ -399,11 +449,11 @@
       .enter()
       .append("text")
       .attr("class", "bar-label")
-      .attr("x", (d, i) => i * barWidth + barWidth / 2 + 56)
+      .attr("x", (d, i) => (width / 5) * 3.9 - i * barWidth + 8)
       .attr("y", (d) => height - d * unitHeight - 37)
       .attr("text-anchor", "middle")
       .attr("fill", "rgb(220, 220, 220)")
-      .style("text-size", "1.3vh")
+      .style("font-size", "1.3vh")
       .text((d) => d);
 
     // Add label below baseline
@@ -414,7 +464,7 @@
       .attr("y", height - 12) // Position the text below the baseline
       .attr("text-anchor", "middle")
       .attr("fill", "#ffffff")
-      .style("text-size", "1.3vh")
+      .style("font-size", "1.3vh")
       .text("Anzahl Datenpunkte pro Kategorie");
   }
 
