@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auftauschicht Zukunft</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .svg-future {
+      width: 33.3333%;
+      height: 100%;
+      z-index: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="divider divider1"></div>
+  <div class="divider divider2"></div>
+
+  <svg id="map1" class="svg-future"></svg>
+  <svg id="map2" class="svg-future"></svg>
+  <svg id="map3" class="svg-future"></svg>
+
+  <div class="nav-bar">
+    <div id="titel-nav-bar">
+      <h4>PERMALOST</h4>
+    </div>
+    <div id="btn-container-mitte">
+      <div class="btn-div-container">
+        <button id="btn-intro">Einleitung</button>
+      </div>
+      <div class="btn-div-container">
+        <a id="btn-home" href="../index.html">Home</a>
+      </div>
+
+      <div class="btn-div-container">
+        <div class="btn-container">
+          <a id="btn-grndtmp" href="../01_grndtmp_aktuell/index.html">Bodentemperatur aktuelle Zahlen</a>
+        </div>
+        <div class="btn-container">
+          <a id="btn-alt" href="../02_alt_aktuell/index.html">Auftauschicht aktuelle Zahlen</a>
+        </div>
+      </div>
+
+      <div class="btn-div-container">
+        <div class="btn-container">
+          <a id="btn-grndtmp-prognose" href="../03_grndtmp_rcp/index.html">Bodentemperatur Prognose</a>
+        </div>
+        <div class="btn-container">
+          <a id="btn-alt-prognose" href="../04_alt_rcp/index.html">Auftauschicht Prognose</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="btn-container-rechts">
+      <div class="btn-div-container">
+        <button id="btn-credits">CREDITS</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="slider-container">
+    <!-- Text für das aktuelle Jahr -->
+    <span id="rs-bullet">1997</span>
+
+    <!-- Slider -->
+    <div class="range-slider">
+      <!-- Slidereinstellungen -->
+      <input id="rs-range-line" class="rs-range" type="range" value="2010" min="2010" max="2100" step="10" />
+    </div>
+  </div>
+
+  <div id="slider-shadow"></div>
+
+  <script src="alt_zukunft.js"></script>
+</body>
+
+</html>

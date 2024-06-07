@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Permafrost Hauptvisualisierung</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+  <div id="overlay-home" class="overlay">
+    <div id="titel-permafrost">
+      <h1>PERMALOST</h1>
+    </div>
+
+    <div id="navigation">
+      <button class="btn-nav">EINLEITUNG</button>
+      <button class="btn-nav">CREDITS</button>
+    </div>
+
+    <div class="containerThemen">
+      <div id="containerRCP" class="container">
+        <div id="titel-rcp">
+          <h3>RCP</h3>
+        </div>
+        <div id="text-rcp">
+          <p>
+            Repräsentative Konzentrationspfade (RCPs) beschreiben die
+            Entwicklung der Treibhausgaskonzentrationen. RCP 2.6 steht für
+            starke Klimaschutz&shy;anstrengungen, RCP 4.5 für moderate An&shy;strengungen
+            und RCP 8.5 für ein "Weiter-wie-bisher" Szenario. Aktuelle Mess&shy;ungen
+            zeigen einen Pfad zwischen RCP 4.5 und RCP 8.5.
+          </p>
+        </div>
+      </div>
+
+      <div id="containerGrndtmp" class="container">
+        <div id="titel-grndtmp">
+          <h2>Bodentemperatur</h2>
+        </div>
+        <div id="text-grndtmp">
+          <p>
+            Die Bodentemperatur ist ein Indikator dafür, ob der Perma&shy;frost taut
+            oder gefroren bleibt. Die Daten stammen aus Messungen in 2 m Tiefe
+            und reagieren daher langsamer auf kurzfristige Klimaveränderungen.
+            Ein kontinuierlicher Temperaturanstieg über längere Zeit weist daher
+            auf eine anhaltende Erwärmung hin und erhöht das Risiko eines
+            Auftauens des Permafrosts.
+          </p>
+        </div>
+
+        <div class="button-container-aktuell">
+          <a class="btn-aktuell" id="grndtmp-btn-aktuell" href="01_grndtmp_aktuell/index.html">Aktuelle Zahlen</a>
+        </div>
+        <div class="button-container-zukunft">
+          <a class="btn-zukunft" id="grndtmp-btn-zukunft" href="03_grndtmp_rcp/index.html">RCP</a>
+        </div>
+      </div>
+
+      <div id="containerAlt" class="container">
+        <div id="titel-alt">
+          <h2>Auftauschicht</h2>
+        </div>
+        <div id="text-alt">
+          <p>
+            Die Mächtigkeit der Auftauschicht ist ein Indikator dafür, wie tief
+            der Permafrost auftaut. Je tiefer die Auftauschicht ist, desto
+            grösser ist die Gefahr, dass sich Hohlräume bilden und der Boden
+            absackt. Zudem deutet eine kontinuierliche Zunahme der
+            Auftauschichtdicke auf eine anhaltende Erwärmung hin.
+          </p>
+        </div>
+        <div class="button-container-aktuell">
+          <a class="btn-aktuell" id="alt-btn-aktuell" href="02_alt_aktuell/index.html">Aktuelle Zahlen</a>
+        </div>
+        <div class="button-container-zukunft">
+          <a class="btn-zukunft" id="alt-btn-zukunft" href="04_alt_rcp/index.html">RCP</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="umriss-container">
+      <div class="umriss">
+        <h3>1997 - 2021</h3>
+      </div>
+
+      <div class="umriss">
+        <h3>2010 - 2100</h3>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
