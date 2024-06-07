@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+
 html,
 body {
   margin: 0;
@@ -32,7 +34,10 @@ body {
   display: block;
   z-index: 4;
   color: white;
-  font-family: "space grotesk";
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
   overflow: auto;
   padding: 2vh 2vw;
 }
@@ -45,7 +50,10 @@ body {
   color: white;
   padding: 0;
   margin: 0;
-  font-family: "space grotesk";
+    font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
 }
 
 .overlay h1 {
@@ -124,7 +132,10 @@ body {
 }
 
 .overlay .containerThemen {
-  font-family: "space grotesk";
+    font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
   color: white;
   position: absolute;
   height: auto;
@@ -146,7 +157,10 @@ body {
   padding: 0;
   margin-left: auto;
   font-size: 100;
-  font-family: "space grotesk";
+    font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
 }
 
 .overlay #containerGrndtmp,
@@ -202,14 +216,20 @@ body {
   outline: 1.5px dashed white;
   color: white;
   text-align: center;
-  font-family: "space grotesk";
+    font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
 }
 
 h4 {
   margin: 0;
   margin-left: 3vw;
   padding: 0;
-  font-family: "space grotesk";
+    font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
   font-size: 4vh;
   color: white;
 }
@@ -270,7 +290,10 @@ h6 {
 #btn-grndtmp-prognose,
 #btn-alt-prognose,
 #btn-credits {
-  font-family: "space grotesk";
+    font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
   font-size: 1.5vh;
   color: white;
   height: 2vh;
@@ -305,7 +328,10 @@ h6 {
   left: 3vw;
   top: 10vh;
   color: white;
-  font-family: "space grotesk";
+    font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
   z-index: 2;
 }
 
@@ -366,7 +392,10 @@ h6 {
 
 .range-slider-zahlen .zahl {
   text-align: center;
-  font-family: "space grotesk";
+    font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
 }
 
 .slider-container {
@@ -423,15 +452,24 @@ input::-webkit-slider-thumb {
 }
 
 .bar-label {
-  font-family: "space grotesk";
+    font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
 }
 
 .grid-label {
-  font-family: "space grotesk";
+    font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
 }
 
 .chart-label {
-  font-family: "space grotesk";
+    font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
 }
 
 .legende svg {
@@ -448,13 +486,19 @@ input::-webkit-slider-thumb {
 }
 
 .legende-label {
-  font-family: "space grotesk";
+    font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
   color: white;
 
 }
 
 .legende-titel {
-  font-family: "space grotesk";
+    font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
 }
 
 #titel-permafrost {
@@ -465,7 +509,10 @@ input::-webkit-slider-thumb {
   color: white;
   padding: 0;
   margin: 0;
-  font-family: "space grotesk";
+    font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
 }
 
 .divider {
