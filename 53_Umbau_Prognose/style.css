@@ -26,6 +26,50 @@ body {
   z-index: 1;
 }
 
+/* EDIT MAX START 
+---------------------------------------------------- */
+
+/* FONT CLASS */
+.font-space-grotesk {
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  color: white;
+}
+
+/* FONT SIZE */
+.font-m {
+  font-size: 1.5vh;
+  line-height: 1.5vh; 
+}
+
+/* SHOW ALL A ELEMENTS INSIDE AN ELEMENT WITH THIS CLASS */
+.subnav-show {
+  /* make "Bodentemperatur" more like a clickable button */
+  cursor: pointer;
+  /* Give a bit space to make the clickable area bigger */
+  padding: 5px 5px;
+  /* to check the clickable area */
+  border: 1px solid red;
+}
+
+.subnav-show a {
+  /* make the a elements transparent by default */
+  opacity: 0; 
+  transition: 0.3s; 
+  /* adjust space between elements */
+  margin-left: 10px;
+}
+
+.subnav-show:hover a {
+  opacity: 1;
+  transition: 0.3s; 
+}
+
+/* EDIT MAX END 
+---------------------------------------------------- */
+
 .overlay {
   position: fixed;
   width: 100%;
