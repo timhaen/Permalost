@@ -14,6 +14,7 @@ Der Code ist nur bedingt responsive. Er ist auf einen FullHD Bildschirm (1920 x 
 3.Im Browser öffnet sich die Webseite.<br><br>
 *Online*<br>
 1.Öffne folgenden Link<br>
+https://timhaen.github.io/Permalost/<br>
 
 **Daten**<br>
 *Daten Bodentemperaturen*<br>
