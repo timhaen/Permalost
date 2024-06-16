@@ -8,21 +8,21 @@ Diese Datenvisualisierung entstand im Rahmen der Bachelorarbeit von Timo Hänni 
 Der Code ist nur bedingt responsive. Er ist auf einen FullHD Bildschirm (1920 x 1080) im Fullscreen Modus optimiert.
 
 **Verwendungsanleitung**<br>
-Lokal<br>
+*Lokal*<br>
 1.Öffne den Code mit Visual Studio Code oder Ähnlichem.<br>
 2.Betreibe den Code mit live-server oder etwas Ähnlichem.<br>
 3.Im Browser öffnet sich die Webseite.<br><br>
-Online<br>
+*Online*<br>
 1.Öffne folgenden Link<br>
 
 **Daten**<br>
-Daten Bodentemperaturen<br>
+*Daten Bodentemperaturen*<br>
 https://catalogue.ceda.ac.uk/uuid/d34330ce3f604e368c06d76de1987ce5<br><br>
 
-Daten Auftauschicht<br>
+*Daten Auftauschicht*<br>
 https://catalogue.ceda.ac.uk/uuid/d34330ce3f604e368c06d76de1987ce5<br><br>
 
-Prognosedaten<br>
+*Prognosedaten*<br>
 Diese Daten wurden von mir aus nicht georeferenzierten Daten des
 Alfred-Wegener-Instituts umgerechnet. Die Zukunftsprognosen stellen
 daher keine exakte Abbildung der Realität dar. Da in diesem Projekt
