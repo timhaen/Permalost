@@ -8,34 +8,33 @@ Diese Datenvisualisierung entstand im Rahmen der Bachelorarbeit von Timo Hänni 
 Der Code ist nur bedingt responsive. Er ist auf einen FullHD Bildschirm (1920 x 1080) im Fullscreen Modus optimiert.
 
 **Verwendungsanleitung**<br>
-Lokal
-1.Öffne den Code mit Visual Studio Code oder Ähnlichem.
-2.Betreibe den Code mit live-server oder etwas Ähnlichem.
-3.Im Browser öffnet sich die Webseite.
-Online
-1.Öffne folgenden Link 
+Lokal<br>
+1.Öffne den Code mit Visual Studio Code oder Ähnlichem.<br>
+2.Betreibe den Code mit live-server oder etwas Ähnlichem.<br>
+3.Im Browser öffnet sich die Webseite.<br><br>
+Online<br>
+1.Öffne folgenden Link<br>
 
 **Daten**<br>
-Daten Bodentemperaturen
-https://catalogue.ceda.ac.uk/uuid/d34330ce3f604e368c06d76de1987ce5
+Daten Bodentemperaturen<br>
+https://catalogue.ceda.ac.uk/uuid/d34330ce3f604e368c06d76de1987ce5<br><br>
 
-Daten Auftauschicht
-https://catalogue.ceda.ac.uk/uuid/d34330ce3f604e368c06d76de1987ce5
+Daten Auftauschicht<br>
+https://catalogue.ceda.ac.uk/uuid/d34330ce3f604e368c06d76de1987ce5<br><br>
 
-Prognosedaten
+Prognosedaten<br>
 Diese Daten wurden von mir aus nicht georeferenzierten Daten des
 Alfred-Wegener-Instituts umgerechnet. Die Zukunftsprognosen stellen
 daher keine exakte Abbildung der Realität dar. Da in diesem Projekt
 jedoch das Visualisierungskonzept im Vordergrund steht, habe ich mich
-entschieden, die Daten trotzdem zu verwenden.
-https://permafrost.awi.eventfive.de/
-        
+entschieden, die Daten trotzdem zu verwenden.<br>
+https://permafrost.awi.eventfive.de/<br><br>
 
-Titel : Permalost
-Untertitel: Das irreversible Auftauen von Permafrost
-Autor: Timo Hänni
-Datum: 10.06.2024
-Mentor: Max Frischknecht
+Titel : Permalost<br>
+Untertitel: Das irreversible Auftauen von Permafrost<br>
+Autor: Timo Hänni<br>
+Datum: 10.06.2024<br>
+Mentor: Max Frischknecht<br><br>
 
-BA Data Design + Art, Hochschule Luzern – Design Film Kunst
+BA Data Design + Art, Hochschule Luzern – Design Film Kunst<br>
 © HSLU, 2024
