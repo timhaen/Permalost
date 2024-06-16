@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PERMALOST</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+      .legende {
+        position: absolute;
+        background-color: rgba(67, 67, 67, 0.8);
+        top: 285px;
+        right: 1vw;
+        width: 180px;
+        height: 245px;
+        z-index: 3;
+        display: inline-block;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="map" style="width: 100%"></div>
+    <div id="grid" style="width: 100%"></div>
+
+    <div class="nav-bar">
+      <div id="titel-nav-bar">
+        <h4>
+          <a
+            href="../00_landing/index.html"
+            style="text-decoration: none; color: white"
+            >PERMALOST</a
+          >
+        </h4>
+      </div>
+
+      <div id="btn-container-mitte">
+        <div class="btn-container font-space-grotesk font-m subnav-show">
+          Bodentemperatur
+          <a
+            class="font-space-grotesk font-m active"
+            id="btn-grndtmp"
+            href="../01_grndtmp_aktuell/index.html"
+            >Aktuelle Zahlen</a
+          >
+          <a
+            class="font-space-grotesk font-m"
+            id="btn-grndtmp-prognose"
+            href="../03_grndtmp_rcp/index.html"
+            >Prognosen</a
+          >
+        </div>
+        <div class="btn-container font-space-grotesk font-m subnav-show">
+          Auftauschicht
+          <a
+            class="font-space-grotesk font-m"
+            id="btn-alt"
+            href="../02_alt_aktuell/index.html"
+            >Aktuelle Zahlen</a
+          >
+          <a
+            class="font-space-grotesk font-m"
+            id="btn-alt-prognose"
+            href="../04_alt_rcp/index.html"
+            >Prognosen</a
+          >
+        </div>
+      </div>
+
+      <div class="btn-container-rechts font-space-grotesk font-m">
+        <a class="btn-rechts" href="../index.html">Einleitung</a>
+        <a class="btn-rechts" id="btn-rechts-credits">Credits</a>
+      </div>
+    </div>
+
+    <div class="beschreibung-container-grndtmp font-space-grotesk font-m">
+      <h5>Bodentemperatur</h5>
+      <h6>
+        Erreicht Permafrost eine Temperatur von etwa -1 C°, beginnt er zu
+        schmelzen. Die rot bis violett einge&shy;färbten Gebiete sind daher
+        besonders stark vom Auftauen bedroht.
+      </h6>
+    </div>
+
+    <div class="legende font-space-grotesk font-m">
+      <svg id="legende-svg"></svg>
+    </div>
+
+    <div class="bar-chart">
+      <svg id="barChartSvg"></svg>
+    </div>
+
+    <div id="slider-shadow"></div>
+    <div class="range-slider-line-container">
+      <div class="range-slider-line">
+        <div class="baseline"></div>
+        <div class="unterteiler"></div>
+      </div>
+    </div>
+
+    <div class="range-slider-zahlen-container font-space-grotesk">
+      <div class="range-slider-zahlen">
+        <div class="jahreszahlen"></div>
+      </div>
+    </div>
+
+    <div class="slider-container">
+      <!-- Slider -->
+      <div class="range-slider">
+        <!-- Slidereinstellungen -->
+        <input
+          id="rs-range-line"
+          class="rs-range"
+          type="range"
+          value="1997"
+          min="1997"
+          max="2021"
+          step="1"
+        />
+      </div>
+    </div>
+
+    <div class="overlay-background-blur">
+      <div class="overlay font-space-grotesk" id="overlay">
+        <h5>Permalost – Das irreversible Auftauen des Permafrosts</h5>
+        <p>
+          Bis 2080 wird erwartet, dass die Permafrostgebiete um etwa ein Drittel
+          zurückgehen. Dieser Rückgang, eine direkte Folge des Klimawandels,
+          stellt uns vor grosse Herausforderungen: Permafrost ist ein Erbe
+          vergangener Eiszeiten, und schnelle Gegenmaßnahmen gegen diesen
+          Rückgang sind nicht möglich. Einmal geschmolzen, ist der Prozess
+          irreversibel. Um das Bewusstsein für den Schmelzprozess und seine
+          Folgen zu schärfen, setzt das Projekt auf interaktive
+          Datenvisualisierungen. Diese ermöglichen es, die aktuelle Lage zu
+          verstehen und einen Blick auf die möglichen zukünftigen Entwicklungen
+          zu werfen.
+        </p>
+
+        <h5><br />Projektrahmen</h5>
+        <p>
+          Diese Datenvisualisierung entstand im Rahmen der Bachelorarbeit von
+          Timo Hänni im Studiengang Data Design + Artan der Hochschule Luzern im
+          Frühlingssemester 2024. Mentoriert wurde das Projekt durch Max
+          Frischknecht.
+        </p>
+
+        <h5><br />Daten</h5>
+        <p>
+          Daten Bodentemperaturen<br />
+          <a
+            href="https://catalogue.ceda.ac.uk/uuid/d34330ce3f604e368c06d76de1987ce5"
+            target="_blank"
+            >Link zu Bodentemperaturdaten</a
+          ><br /><br />
+          Daten Auftauschicht<br />
+          <a
+            href="https://catalogue.ceda.ac.uk/uuid/d34330ce3f604e368c06d76de1987ce5"
+            target="_blank"
+            >Link zu Auftauschichtdaten</a
+          ><br /><br />
+          Prognosedaten<br />
+          Diese Daten wurden von mir aus nicht georeferenzierten Daten des
+          Alfred-Wegener-Instituts umgerechnet. Die Zukunftsprognosen stellen
+          daher keine exakte Abbildung der Realität dar. Da in diesem Projekt
+          jedoch das Visualisierungskonzept im Vordergrund steht, habe ich mich
+          entschieden, die Daten trotzdem zu verwenden.<br />
+          <a href="https://permafrost.awi.eventfive.de/" target="_blank"
+            >Link zu Prognosedaten</a
+          >
+        </p>
+
+        <h5><br />Weitere Links</h5>
+        <p>
+          Verwendete Library<br />
+          <a href="https://d3js.org/" target="_blank">Graphic Engine D3</a
+          ><br /><br />
+          Github Repository<br />
+          <a href="https://github.com/timhaen/Permalost" target="_blank"
+            >Project Permalost</a
+          ><br /><br />
+        </p>
+      </div>
+    </div>
+
+    <script src="grndtmp_aktuell.js"></script>
+  </body>
+</html>
