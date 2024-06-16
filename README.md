@@ -1,13 +1,13 @@
-**Permalost – Das irreversible Auftauen des Permafrosts**
+**Permalost – Das irreversible Auftauen des Permafrosts** <br>
 Bis 2080 wird erwartet, dass die Permafrostgebiete um etwa ein Drittel zurückgehen. Dieser Rückgang, eine direkte Folge des Klimawandels, stellt uns vor grosse Herausforderungen: Permafrost ist ein Erbe vergangener Eiszeiten, und schnelle Gegenmaßnahmen gegen diesen Rückgang sind nicht möglich. Einmal geschmolzen, ist der Prozess irreversibel. Um das Bewusstsein für den Schmelzprozess und seine Folgen zu schärfen, setzt das Projekt auf interaktive Datenvisualisierungen. Diese ermöglichen es, die aktuelle Lage zu verstehen und einen Blick auf die möglichen zukünftigen Entwicklungen zu werfen.
 
-**Projektrahmen**
+**Projektrahmen**<br>
 Diese Datenvisualisierung entstand im Rahmen der Bachelorarbeit von Timo Hänni im Studiengang Data Design + Artan der Hochschule Luzern im Frühlingssemester 2024. Mentoriert wurde das Projekt durch Max Frischknecht.
 
-**Mögliche Layoutverschiebungen**
+**Mögliche Layoutverschiebungen**<br>
 Der Code ist nur bedingt responsive. Er ist auf einen FullHD Bildschirm (1920 x 1080) im Fullscreen Modus optimiert.
 
-**Verwendungsanleitung**
+**Verwendungsanleitung**<br>
 Lokal
 1.Öffne den Code mit Visual Studio Code oder Ähnlichem.
 2.Betreibe den Code mit live-server oder etwas Ähnlichem.
@@ -15,7 +15,7 @@ Lokal
 Online
 1.Öffne folgenden Link 
 
-**Daten**
+**Daten**<br>
 Daten Bodentemperaturen
 https://catalogue.ceda.ac.uk/uuid/d34330ce3f604e368c06d76de1987ce5
 
